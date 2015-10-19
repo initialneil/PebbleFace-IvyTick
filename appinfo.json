@@ -1,0 +1,49 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "initialneil@gmail.com",
+    "longName": "IvyTick",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "fonts/01 DigiGraphics.ttf",
+                "name": "FONT_DIGIGRAPHICS_16",
+                "type": "font"
+            },
+            {
+                "file": "fonts/01 DigiGraphics.ttf",
+                "name": "FONT_DIGIGRAPHICS_14",
+                "type": "font"
+            },
+            {
+                "file": "fonts/digital-7.ttf",
+                "name": "FONT_DIGITAL_18",
+                "type": "font"
+            },
+            {
+                "file": "fonts/digital-7.ttf",
+                "name": "FONT_DIGITAL_16",
+                "type": "font"
+            },
+            {
+                "file": "fonts/digital-7.ttf",
+                "name": "FONT_DIGITAL_14",
+                "type": "font"
+            }
+        ]
+    },
+    "sdkVersion": "3",
+    "shortName": "IvyTick",
+    "targetPlatforms": [
+        "basalt",
+        "chalk"
+    ],
+    "uuid": "4464b4f0-d236-4d61-a0c6-ef0ff92aeb70",
+    "versionLabel": "1.0",
+    "watchapp": {
+        "watchface": true
+    }
+}
