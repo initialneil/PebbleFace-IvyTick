@@ -3,6 +3,7 @@
 #include "panel.h"
 #include "hand.h"
 #include "text.h"
+#include "weather.h"
 
 #define ANTIALIASING true
 
@@ -15,7 +16,7 @@
 const bool SHOW_SECOND = false;
 
 static Window *s_main_window;
-static Layer *s_panel_layer, *s_hand_layer;
+static Layer *s_panel_layer, *s_hand_layer, *s_weather_layer;
 static TextLayer *s_month_layer, *s_date_layer, *s_weekday_layer;
 
 /************************************ UI **************************************/
@@ -31,10 +32,14 @@ static void window_load(Window *window) {
   // init layers
   s_panel_layer = init_panel_layer(window);
   s_hand_layer = init_hand_layer(window);
+  
   init_date_layer(window);
   s_month_layer = get_month_layer();
   s_date_layer = get_date_layer();
   s_weekday_layer = get_weekday_layer();
+  
+  init_weather_layer(window);
+  s_weather_layer = get_weather_layer();
   
   // add to window layer
   Layer *window_layer = window_get_root_layer(window);
@@ -45,15 +50,21 @@ static void window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_weekday_layer));
 
   layer_add_child(window_layer, s_hand_layer);
+  
+  layer_add_child(window_layer, s_weather_layer);
 }
 
 static void window_unload(Window *window) {
   layer_destroy(s_panel_layer);
   layer_destroy(s_hand_layer);
+  
   text_layer_destroy(s_month_layer);
   text_layer_destroy(s_date_layer);
   text_layer_destroy(s_weekday_layer);
   release_date_layer();
+  
+  layer_destroy(s_weather_layer);
+  release_weather_layer();
 }
 
 /*********************************** App **************************************/
@@ -74,7 +85,10 @@ static void init() {
   hand_tick_handler(time_now, SHOW_SECOND);
   
   // subscribe on time tick
-  tick_timer_service_subscribe(SECOND_UNIT, hand_tick_handler);
+  if (SHOW_SECOND)
+    tick_timer_service_subscribe(SECOND_UNIT, hand_tick_handler);
+  else
+    tick_timer_service_subscribe(MINUTE_UNIT, hand_tick_handler);
 }
 
 static void deinit() {

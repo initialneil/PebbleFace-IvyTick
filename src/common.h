@@ -52,13 +52,13 @@ typedef struct {
 #define HOUR_DOTS_COLOR GColorDarkGray
 
 #define PANEL_IN_COLOR GColorWhite
-#define PANEL_OUT_COLOR GColorBlack
+#define PANEL_OUT_COLOR GColorWhite
 
 // hand color
 #define HOUR_HAND_COLOR GColorBlack
 #define HOUR_HAND_INSIDE_COLOR GColorWhite
 
-#define MINUTE_HAND_COLOR GColorBlack
+#define MINUTE_HAND_COLOR GColorYellow
 #define MINUTE_HAND_INSIDE_COLOR GColorWhite
 
 #define SECOND_HAND_COLOR GColorChromeYellow

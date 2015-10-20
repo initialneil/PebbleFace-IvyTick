@@ -14,11 +14,9 @@ Layer * init_hand_layer(Window *window) {
   GRect window_bounds = layer_get_bounds(window_layer);
 
   s_center = grect_center_point(&window_bounds);
-  APP_LOG(APP_LOG_LEVEL_INFO, "window center: %d, %d", s_center.x, s_center.y);
   
   s_win_w = window_bounds.size.w;
   s_win_h = window_bounds.size.h;
-  APP_LOG(APP_LOG_LEVEL_INFO, "window size: %d, %d", s_win_w, s_win_h);
   
   s_radius = s_win_w < s_win_h ? s_win_w : s_win_h;
   s_radius /= 2;
