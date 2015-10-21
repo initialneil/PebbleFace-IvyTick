@@ -7,6 +7,14 @@ typedef struct {
   int seconds;
 } Time;
 
+enum APP_MSG_TYPE {
+  WEATHER_ICON_KEY = 0,
+  WEATHER_TEMPERATURE_KEY,
+  WEATHER_CITY_KEY,
+  SHOW_WEATHER,
+  SHOW_LOCATION,
+};
+
 #define COLORS true
 //#define SHOW_SCREENSHOT
 #define COLOR_PRESET 0

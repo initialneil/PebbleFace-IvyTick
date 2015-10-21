@@ -11,6 +11,7 @@ static int s_radius = 0, s_win_w = 0, s_win_h = 0;
 
 static int WEATHER_GPATH_ID = WEATHER_UNKNOWN;
 static char *s_conditions_buffer, *s_temperature_buffer, *s_city_buffer;
+static bool s_show_weather = true, s_show_location = true;
 
 void init_weather_layer(Window *window) {
   APP_LOG(APP_LOG_LEVEL_INFO, "init weather layer");
@@ -59,6 +60,23 @@ TextLayer * get_temperature_layer() {
 
 TextLayer * get_city_layer() {
   return s_city_layer;
+}
+
+void config_weather_layer(bool show_weather, bool show_location) {
+  s_show_weather = show_weather;
+  s_show_location = show_location;
+  
+  layer_set_hidden(s_weather_layer, !show_weather);
+  layer_set_hidden(text_layer_get_layer(s_temperature_layer), !show_weather);
+  layer_set_hidden(text_layer_get_layer(s_city_layer), !show_location);
+  
+  persist_write_bool(SHOW_WEATHER, s_show_weather);
+  persist_write_bool(SHOW_LOCATION, s_show_location);
+}
+
+void get_weather_config(bool *show_weather, bool *show_location) {
+  *show_weather = s_show_weather;
+  *show_location = s_show_location;
 }
 
 static void update_weather_proc(Layer *layer, GContext *ctx) {

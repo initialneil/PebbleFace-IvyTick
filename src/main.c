@@ -21,6 +21,8 @@ static Layer *s_panel_layer, *s_hand_layer, *s_weather_layer;
 static TextLayer *s_month_layer, *s_date_layer, *s_weekday_layer;
 static TextLayer *s_temperature_layer, *s_city_layer;
 
+static bool s_show_weather = true, s_show_location = true;
+
 /************************************ UI **************************************/
 static void hand_tick_handler(struct tm *tick_time, TimeUnits changed) {
   // update hand
@@ -30,6 +32,7 @@ static void hand_tick_handler(struct tm *tick_time, TimeUnits changed) {
   set_date_layer_cur_time(tick_time);
   
   // update weather
+  config_weather_layer(s_show_weather, s_show_location);
   update_weather_with_app_msg(tick_time);
 }
 
@@ -78,9 +81,20 @@ static void window_unload(Window *window) {
   release_weather_layer();
 }
 
+static void init_config() {
+  if (persist_exists(SHOW_WEATHER))
+    s_show_weather = persist_read_bool(SHOW_WEATHER);
+  
+  if (persist_exists(SHOW_LOCATION))
+    s_show_location = persist_read_bool(SHOW_LOCATION);
+}
+
 /*********************************** App **************************************/
 static void init() {
   srand(time(NULL));
+  
+  // init configuration
+  init_config();
 
   // init main window
   s_main_window = window_create();
