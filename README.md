@@ -1,7 +1,15 @@
 # PebbleFace-IvyTick
 Analog Watch Face from "http://wear.ustwo.com/". This is a free watch face for fun.
 
+- Month, date and weekday are shown
+- Weather and location are configurable
+- Configuration page is based on "[slate](https://github.com/pebble-examples/slate-config-example)" style and hosted on "[gh-pages](https://github.com/initialneil/PebbleFace-IvyTick/tree/gh-pages)" branch.
+
+
+## Preview
 ![alt text](https://raw.githubusercontent.com/initialneil/PebbleFace-IvyTick/master/screenshots/IvyTick%20-%201.png "IvyTick (Preset #1)")
+
+![alt text](https://raw.githubusercontent.com/initialneil/PebbleFace-IvyTick/master/screenshots/IvyTick%20-%202.png "IvyTick (Preset #1)")
 
 ## License
 
@@ -26,4 +34,3 @@ Analog Watch Face from "http://wear.ustwo.com/". This is a free watch face for f
      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
      SOFTWARE.  
-
