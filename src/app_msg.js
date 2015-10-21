@@ -23,7 +23,7 @@ Pebble.addEventListener('appmessage',
 
 // Configure
 Pebble.addEventListener('showConfiguration', function() {
-  var url = 'https://rawgit.com/pebble-examples/design-guides-slate-config/master/config/index.html';
+  var url = 'http://initialneil.github.io/PebbleFace-IvyTick';
   console.log('Showing configuration page: ' + url);
 
   Pebble.openURL(url);
@@ -33,7 +33,15 @@ Pebble.addEventListener('webviewclosed', function(e) {
   var configData = JSON.parse(decodeURIComponent(e.response));
   console.log('Configuration page returned: ' + JSON.stringify(configData));
 
-  var dict = {};
+  var show_weather = configData.show_weather;
+  var show_location = configData.show_location;
+  console.log("show_weather = " + show_weather);
+  console.log("show_location = " + show_location);
+
+  var dict = {
+    'SHOW_WEATHER': show_weather,
+    'SHOW_LOCATION': show_location,
+  };
 
   // Send to watchapp
   Pebble.sendAppMessage(dict, function() {

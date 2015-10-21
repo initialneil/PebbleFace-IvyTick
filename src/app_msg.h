@@ -1,11 +1,6 @@
 #pragma once
 #include <pebble.h>
-
-enum APP_MSG_TYPE {
-  WEATHER_ICON_KEY = 0,
-  WEATHER_TEMPERATURE_KEY,
-  WEATHER_CITY_KEY,
-};
+#include "common.h"
 
 void inbox_received_callback(DictionaryIterator *iterator, void *context);
 

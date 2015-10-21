@@ -1,5 +1,7 @@
 {
     "appKeys": {
+        "SHOW_LOCATION": 4,
+        "SHOW_WEATHER": 3,
         "WEATHER_CITY_KEY": 2,
         "WEATHER_ICON_KEY": 0,
         "WEATHER_TEMPERATURE_KEY": 1
@@ -15,7 +17,7 @@
         "media": [
             {
                 "file": "fonts/digital-7.ttf",
-                "name": "FONT_DIGITAL_14",
+                "name": "FONT_DIGITAL_18",
                 "type": "font"
             },
             {
@@ -25,17 +27,17 @@
             },
             {
                 "file": "fonts/digital-7.ttf",
-                "name": "FONT_DIGITAL_18",
-                "type": "font"
-            },
-            {
-                "file": "fonts/01 DigiGraphics.ttf",
-                "name": "FONT_DIGIGRAPHICS_14",
+                "name": "FONT_DIGITAL_14",
                 "type": "font"
             },
             {
                 "file": "fonts/01 DigiGraphics.ttf",
                 "name": "FONT_DIGIGRAPHICS_16",
+                "type": "font"
+            },
+            {
+                "file": "fonts/01 DigiGraphics.ttf",
+                "name": "FONT_DIGIGRAPHICS_14",
                 "type": "font"
             }
         ]
