@@ -45,6 +45,12 @@ typedef struct {
 #define WEEKDAY_COLOR GColorVividCerulean
 #define WEEKDAY_BACKGROUND_COLOR GColorClear
 
+// weather
+#define TEMPERATURE_COLOR GColorChromeYellow
+
+// city
+#define CITY_COLOR GColorWhite
+
 #elif COLOR_PRESET == 1
 
 // panel color
@@ -79,6 +85,12 @@ typedef struct {
 #define WEEKDAY_COLOR GColorRoseVale
 #define WEEKDAY_BACKGROUND_COLOR GColorClear
 
+// weather
+#define TEMPERATURE_COLOR GColorChromeYellow
+
+// city
+#define CITY_COLOR GColorWhite
+
 #elif COLOR_PRESET == 2
 
 // panel color
@@ -112,6 +124,12 @@ typedef struct {
 // weekday
 #define WEEKDAY_COLOR GColorVividCerulean
 #define WEEKDAY_BACKGROUND_COLOR GColorClear
+
+// weather
+#define TEMPERATURE_COLOR GColorChromeYellow
+
+// city
+#define CITY_COLOR GColorWhite
 
 #endif
 

@@ -1,7 +1,11 @@
 {
-    "appKeys": {},
+    "appKeys": {
+        "WEATHER_CITY_KEY": 2,
+        "WEATHER_ICON_KEY": 0,
+        "WEATHER_TEMPERATURE_KEY": 1
+    },
     "capabilities": [
-        ""
+        "location"
     ],
     "companyName": "initialneil@gmail.com",
     "longName": "IvyTick",
@@ -42,7 +46,7 @@
         "chalk"
     ],
     "uuid": "4464b4f0-d236-4d61-a0c6-ef0ff92aeb70",
-    "versionLabel": "1.0",
+    "versionLabel": "1.2",
     "watchapp": {
         "watchface": true
     }

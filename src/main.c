@@ -4,6 +4,7 @@
 #include "hand.h"
 #include "text.h"
 #include "weather.h"
+#include "app_msg.h"
 
 #define ANTIALIASING true
 
@@ -18,6 +19,7 @@ const bool SHOW_SECOND = false;
 static Window *s_main_window;
 static Layer *s_panel_layer, *s_hand_layer, *s_weather_layer;
 static TextLayer *s_month_layer, *s_date_layer, *s_weekday_layer;
+static TextLayer *s_temperature_layer, *s_city_layer;
 
 /************************************ UI **************************************/
 static void hand_tick_handler(struct tm *tick_time, TimeUnits changed) {
@@ -26,6 +28,9 @@ static void hand_tick_handler(struct tm *tick_time, TimeUnits changed) {
   
   // update date
   set_date_layer_cur_time(tick_time);
+  
+  // update weather
+  update_weather_with_app_msg(tick_time);
 }
 
 static void window_load(Window *window) {
@@ -40,6 +45,8 @@ static void window_load(Window *window) {
   
   init_weather_layer(window);
   s_weather_layer = get_weather_layer();
+  s_temperature_layer = get_temperature_layer();
+  s_city_layer = get_city_layer();
   
   // add to window layer
   Layer *window_layer = window_get_root_layer(window);
@@ -49,9 +56,11 @@ static void window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
   layer_add_child(window_layer, text_layer_get_layer(s_weekday_layer));
 
-  layer_add_child(window_layer, s_hand_layer);
-  
   layer_add_child(window_layer, s_weather_layer);
+  layer_add_child(window_layer, text_layer_get_layer(s_temperature_layer));
+  layer_add_child(window_layer, text_layer_get_layer(s_city_layer));
+  
+  layer_add_child(window_layer, s_hand_layer);
 }
 
 static void window_unload(Window *window) {
@@ -64,6 +73,8 @@ static void window_unload(Window *window) {
   release_date_layer();
   
   layer_destroy(s_weather_layer);
+  text_layer_destroy(s_temperature_layer);
+  text_layer_destroy(s_city_layer);
   release_weather_layer();
 }
 
@@ -89,6 +100,15 @@ static void init() {
     tick_timer_service_subscribe(SECOND_UNIT, hand_tick_handler);
   else
     tick_timer_service_subscribe(MINUTE_UNIT, hand_tick_handler);
+  
+  // register app message callbacks
+  app_message_register_inbox_received(inbox_received_callback);
+  app_message_register_inbox_dropped(inbox_dropped_callback);
+  app_message_register_outbox_failed(outbox_failed_callback);
+  app_message_register_outbox_sent(outbox_sent_callback);
+  
+  // open AppMessage
+  app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
 }
 
 static void deinit() {

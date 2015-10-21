@@ -1,5 +1,5 @@
-#include "gpath-draw.h"
-#include "gpath-weather.h"
+#include "gpath_draw.h"
+#include "gpath_weather.h"
 
 static GPath *s_my_path_ptr = NULL;
 

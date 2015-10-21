@@ -33,17 +33,17 @@ void init_date_layer(Window *window) {
   s_text_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_DIGITAL_16));
 
   // Create month TextLayer
-  s_month_layer = text_layer_create(GRect(s_win_w - 40, 0, 40, 25));
+  s_month_layer = text_layer_create(GRect(s_win_w - 39, 0, 40, 25));
   text_layer_set_text_color(s_month_layer, MONTH_COLOR);
   text_layer_set_background_color(s_month_layer, MONTH_BACKGROUND_COLOR);
   text_layer_set_text_alignment(s_month_layer, GTextAlignmentLeft);
   text_layer_set_font(s_month_layer, s_text_font);
   
   // Create date TextLayer
-  s_date_layer = text_layer_create(GRect(s_win_w - 16, 0, 40, 25));
+  s_date_layer = text_layer_create(GRect(s_win_w - 17, 0, 15, 25));
   text_layer_set_text_color(s_date_layer, DATE_COLOR);
   text_layer_set_background_color(s_date_layer, DATE_BACKGROUND_COLOR);
-  text_layer_set_text_alignment(s_date_layer, GTextAlignmentLeft);
+  text_layer_set_text_alignment(s_date_layer, GTextAlignmentRight);
   text_layer_set_font(s_date_layer, s_text_font);
   
   // Create Weekday TextLayer
@@ -80,8 +80,8 @@ void convertToUpperCase(char *sPtr, int n)
 
 // Copy date into buffer from tm structure and show
 void set_date_layer_cur_time(struct tm *tick_time) {
-  if (s_date_inited && (tick_time->tm_hour != 0 || s_cur_time.minutes != 0 || tick_time->tm_sec > 0))
-    return;
+  //if (s_date_inited && (tick_time->tm_hour != 0 || s_cur_time.minutes != 0 || tick_time->tm_sec > 0))
+  //  return;
   
   APP_LOG(APP_LOG_LEVEL_INFO, "update date layer");
   
