@@ -21,6 +21,29 @@ Pebble.addEventListener('appmessage',
   }                     
 );
 
+// Configure
+Pebble.addEventListener('showConfiguration', function() {
+  var url = 'https://rawgit.com/pebble-examples/design-guides-slate-config/master/config/index.html';
+  console.log('Showing configuration page: ' + url);
+
+  Pebble.openURL(url);
+});
+
+Pebble.addEventListener('webviewclosed', function(e) {
+  var configData = JSON.parse(decodeURIComponent(e.response));
+  console.log('Configuration page returned: ' + JSON.stringify(configData));
+
+  var dict = {};
+
+  // Send to watchapp
+  Pebble.sendAppMessage(dict, function() {
+    console.log('Send successful: ' + JSON.stringify(dict));
+  }, function() {
+    console.log('Send failed!');
+  });
+});
+
+// Check weather id
 function iconFromWeatherId(weatherId) {
   if (weatherId >= 200 && weatherId < 300) {
     return 'Thunderstorm';
@@ -43,6 +66,7 @@ function iconFromWeatherId(weatherId) {
   }
 }
 
+// Fetch weather from OpenWeatherMap
 function fetchWeather(latitude, longitude) {
   var req = new XMLHttpRequest();
   req.open('GET', 'http://api.openweathermap.org/data/2.5/weather?' +

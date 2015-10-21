@@ -5,7 +5,8 @@
         "WEATHER_TEMPERATURE_KEY": 1
     },
     "capabilities": [
-        "location"
+        "location",
+        "configurable"
     ],
     "companyName": "initialneil@gmail.com",
     "longName": "IvyTick",
