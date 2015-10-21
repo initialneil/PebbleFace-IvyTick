@@ -15,26 +15,26 @@ function submitHandler() {
 }
 
 function loadOptions() {
-  var $backgroundColorPicker = $('#backgroundColorPicker');
-  var $timeFormatCheckbox = $('#timeFormatCheckbox');
+  var $show_weather = $('input[name=show-weather]');
+  var $show_location = $('input[name=show-location]');
 
-  if (localStorage.backgroundColor) {
-    $backgroundColorPicker[0].value = localStorage.backgroundColor;
-    $timeFormatCheckbox[0].checked = localStorage.twentyFourHourFormat === 'true';
+  if (localStorage.show_weather) {
+    $show_weather[0].checked = localStorage.show_weather === 'true';
+    $show_location[0].checked = localStorage.show_location === 'true';
   }
 }
 
 function getAndStoreConfigData() {
-  var $backgroundColorPicker = $('#backgroundColorPicker');
-  var $timeFormatCheckbox = $('#timeFormatCheckbox');
+  var $show_weather = $('input[name=show-weather]');
+  var $show_location = $('input[name=show-location]');
 
   var options = {
-    backgroundColor: $backgroundColorPicker.val(),
-    twentyFourHourFormat: $timeFormatCheckbox[0].checked
+    show_weather: $show_weather[0].checked,
+    show_location: $show_location[0].checked
   };
 
-  localStorage.backgroundColor = options.backgroundColor;
-  localStorage.twentyFourHourFormat = options.twentyFourHourFormat;
+  localStorage.show_weather = options.show_weather;
+  localStorage.show_location = options.show_location;
 
   console.log('Got options: ' + JSON.stringify(options));
   return options;
