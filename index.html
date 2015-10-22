@@ -38,7 +38,11 @@
     <div class="item-container-header">Location</div>
     <div class="item-container-content">
       <label class="item">
-         Default Location
+        Default Location
+        <select name="location-opt" dir='rtl' class="item-select">
+          <option class="item-select-option" id="location-opt-auto" selected>Auto Detect</option>
+          <option class="item-select-option" id="location-opt-default">Default Only</option>
+        </select>
       </label>
       
       <label class="item">
@@ -46,10 +50,7 @@
           <input type="text" class="item-input" name="default-location" placeholder="Default Location">
         </div>
         
-        <select name="location-opt" dir='rtl' class="item-select">
-          <option class="item-select-option" id="location-opt-auto" selected>Auto Detect</option>
-          <option class="item-select-option" id="location-opt-default">Default Only</option>
-        </select>
+        
       </label>
     </div>
   </div>
