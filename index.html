@@ -21,7 +21,7 @@
   </div>
   
   <div class="item-container">
-    <div class="item-container-header">Weather & Location</div>
+    <div class="item-container-header">Display</div>
     <div class="item-container-content">
       <label class="item">
         Show Weather
@@ -30,6 +30,26 @@
       <label class="item">
         Show Location
         <input type="checkbox" class="item-toggle" name="show-location" checked>
+      </label>
+    </div>
+  </div>
+  
+  <div class="item-container">
+    <div class="item-container-header">Location</div>
+    <div class="item-container-content">
+      <label class="item">
+         Default Location
+      </label>
+      
+      <label class="item">
+        <div class="item-input-wrapper item-input-wrapper-button">
+          <input type="text" class="item-input" name="default-location" placeholder="Default Location">
+        </div>
+        
+        <select name="location-opt" dir='rtl' class="item-select">
+          <option class="item-select-option" id="location-opt-auto" selected>Auto Detect</option>
+          <option class="item-select-option" id="location-opt-default">Default Only</option>
+        </select>
       </label>
     </div>
   </div>
