@@ -8,11 +8,3 @@
   text-align: center;
 }
 
-input[type=text],
-select {
-  font-size: 1.8em;
-}
-
-.item-select-option {
-  font-size: 20px;
-}
