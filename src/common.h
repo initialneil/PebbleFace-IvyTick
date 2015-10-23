@@ -8,12 +8,20 @@ typedef struct {
 } Time;
 
 enum APP_MSG_TYPE {
-  WEATHER_ICON_KEY = 0,
+  PEBBLEKIT_JS_READY = 0,
+  WEATHER_ICON_KEY,
   WEATHER_TEMPERATURE_KEY,
   WEATHER_CITY_KEY,
   SHOW_WEATHER,
   SHOW_LOCATION,
+  DEFAULT_LOCATION,
+  LOCATION_OPT,
 };
+
+static bool s_pebblekit_js_ready = false;
+static void set_pebblekit_js_ready(bool ready) {
+  s_pebblekit_js_ready = ready;
+}
 
 #define COLORS true
 //#define SHOW_SCREENSHOT

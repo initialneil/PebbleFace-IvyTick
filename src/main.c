@@ -21,7 +21,9 @@ static Layer *s_panel_layer, *s_hand_layer, *s_weather_layer;
 static TextLayer *s_month_layer, *s_date_layer, *s_weekday_layer;
 static TextLayer *s_temperature_layer, *s_city_layer;
 
+static char s_conditions_buffer[32], s_temperature_buffer[32], s_city_buffer[32];
 static bool s_show_weather = true, s_show_location = true;
+static char s_default_location[32], s_location_opt[32];
 
 /************************************ UI **************************************/
 static void hand_tick_handler(struct tm *tick_time, TimeUnits changed) {
@@ -32,8 +34,8 @@ static void hand_tick_handler(struct tm *tick_time, TimeUnits changed) {
   set_date_layer_cur_time(tick_time);
   
   // update weather
-  config_weather_layer(s_show_weather, s_show_location);
-  update_weather_with_app_msg(tick_time);
+  if (tick_time->tm_min % 30 == 0)
+    update_weather_with_app_msg();
 }
 
 static void window_load(Window *window) {
@@ -82,19 +84,45 @@ static void window_unload(Window *window) {
 }
 
 static void init_config() {
+  // display
   if (persist_exists(SHOW_WEATHER))
     s_show_weather = persist_read_bool(SHOW_WEATHER);
   
   if (persist_exists(SHOW_LOCATION))
     s_show_location = persist_read_bool(SHOW_LOCATION);
+  
+  config_weather_layer(s_show_weather, s_show_location);
+  
+  // weather & location diaplay
+  memset(s_conditions_buffer, 0, sizeof(s_conditions_buffer));
+  if (persist_exists(WEATHER_ICON_KEY))
+    persist_read_string(WEATHER_ICON_KEY, s_conditions_buffer, sizeof(s_conditions_buffer));
+  
+  memset(s_temperature_buffer, 0, sizeof(s_temperature_buffer));
+  if (persist_exists(WEATHER_TEMPERATURE_KEY))
+    persist_read_string(WEATHER_TEMPERATURE_KEY, s_temperature_buffer, sizeof(s_temperature_buffer));
+  
+  memset(s_city_buffer, 0, sizeof(s_city_buffer));
+  if (persist_exists(WEATHER_CITY_KEY))
+    persist_read_string(WEATHER_CITY_KEY, s_city_buffer, sizeof(s_city_buffer));
+  
+  config_weather_buffer(s_conditions_buffer, s_temperature_buffer, s_city_buffer);
+  
+  // location setting
+  memset(s_default_location, 0, sizeof(s_default_location));
+  if (persist_exists(DEFAULT_LOCATION))
+    persist_read_string(DEFAULT_LOCATION, s_default_location, sizeof(s_default_location));
+  
+  memset(s_location_opt, 0, sizeof(s_location_opt));
+  if (persist_exists(LOCATION_OPT))
+    persist_read_string(LOCATION_OPT, s_location_opt, sizeof(s_location_opt));
+  
+  config_location_setting(s_default_location, s_location_opt);
 }
 
 /*********************************** App **************************************/
 static void init() {
   srand(time(NULL));
-  
-  // init configuration
-  init_config();
 
   // init main window
   s_main_window = window_create();
@@ -103,11 +131,15 @@ static void init() {
     .unload = window_unload,
   });
   window_stack_push(s_main_window, true);
+  
+  // init configuration
+  init_config();
 
   // handle tick now
   time_t t = time(NULL);
   struct tm *time_now = localtime(&t);
-  hand_tick_handler(time_now, SHOW_SECOND);
+  hand_tick_handler(time_now, 0);
+  refresh_weather_display();
   
   // subscribe on time tick
   if (SHOW_SECOND)
